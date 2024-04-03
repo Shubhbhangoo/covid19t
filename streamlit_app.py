@@ -1,4 +1,4 @@
-
+import streamlit as st
 # Streamlit app
 def main():
     st.title('COVID-19 Detection from Chest X-rays')
