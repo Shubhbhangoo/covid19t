@@ -5,6 +5,18 @@ import numpy as np
 
 model = tf.keras.models.load_model('model.hdf5')
 
+def preprocess_image(image):
+    img = Image.open(image)
+    img = img.resize((50, 50)) # Assuming your model expects input size (224, 224)
+    img_array = np.array(img) /50.0 # Normalize pixel values
+    return img_array.reshape((1, 50, 50, 3)) # Reshape and return
+
+def predict(image):
+    processed_image = preprocess_image(image)
+    prediction = model.predict(processed_image)
+    return prediction
+
+
 # Streamlit app
 def main():
     st.title('COVID-19 Detection from Chest X-rays')
